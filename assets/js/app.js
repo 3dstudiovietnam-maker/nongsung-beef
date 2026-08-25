@@ -17,8 +17,13 @@
 
     var q = new URLSearchParams(location.search).get("lang");
     if (q && window.I18N[q]) return q;
+
+    // Deliberately sessionStorage, NOT localStorage: the Thai market is the
+    // target, so every new visit must open in Thai. A language the visitor
+    // picked earlier is kept only while they browse in that tab — it must
+    // never hijack the first impression days later.
     var saved = null;
-    try { saved = localStorage.getItem(STORE_KEY); } catch (e) {}
+    try { saved = sessionStorage.getItem(STORE_KEY); } catch (e) {}
     if (saved && window.I18N[saved]) return saved;
     return DEFAULT_LANG;
   }
@@ -47,7 +52,10 @@
       b.classList.toggle("is-on", b.dataset.lang === lang);
     });
 
-    try { localStorage.setItem(STORE_KEY, lang); } catch (e) {}
+    try { sessionStorage.setItem(STORE_KEY, lang); } catch (e) {}
+    // Clear any value left by the previous localStorage-based version, so a
+    // visitor who used the old build is not stuck in the wrong language.
+    try { localStorage.removeItem(STORE_KEY); } catch (e) {}
 
     buildMarquee(dict);
   }
