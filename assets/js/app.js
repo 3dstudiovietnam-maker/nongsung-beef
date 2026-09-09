@@ -48,9 +48,13 @@
       if (v != null) el.innerHTML = v;
     });
 
-    document.querySelectorAll("#lang button").forEach(function (b) {
+    document.querySelectorAll(".lang__opt").forEach(function (b) {
       b.classList.toggle("is-on", b.dataset.lang === lang);
+      b.setAttribute("aria-selected", String(b.dataset.lang === lang));
     });
+    var cur = document.getElementById("langCur");
+    var meta = (window.LANGS || []).find(function (l) { return l.code === lang; });
+    if (cur && meta) cur.textContent = meta.short || meta.label;
 
     try { sessionStorage.setItem(STORE_KEY, lang); } catch (e) {}
     // Clear any value left by the previous localStorage-based version, so a
@@ -63,13 +67,56 @@
   function buildLangSwitch() {
     var host = document.getElementById("lang");
     if (!host) return;
-    window.LANGS.forEach(function (l) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.dataset.lang = l.code;
-      b.textContent = l.label;
-      b.addEventListener("click", function () { apply(l.code); });
-      host.appendChild(b);
+
+    // Only offer a language that actually has a dictionary — a half-shipped
+    // build must never present a button that silently does nothing.
+    var langs = (window.LANGS || []).filter(function (l) { return window.I18N[l.code]; });
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "lang__btn";
+    btn.setAttribute("aria-haspopup", "listbox");
+    btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-label", "Language");
+    btn.innerHTML =
+      '<span id="langCur">' + (langs[0] ? (langs[0].short || langs[0].label) : "") + "</span>" +
+      '<svg viewBox="0 0 10 6" aria-hidden="true">' +
+      '<path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
+
+    var menu = document.createElement("div");
+    menu.className = "lang__menu";
+    menu.setAttribute("role", "listbox");
+
+    langs.forEach(function (l) {
+      var o = document.createElement("button");
+      o.type = "button";
+      o.className = "lang__opt";
+      o.setAttribute("role", "option");
+      o.dataset.lang = l.code;
+      o.innerHTML = '<span class="lang__code">' + l.code + "</span>" +
+                    '<span class="lang__name"></span>';
+      o.querySelector(".lang__name").textContent = l.label;
+      o.addEventListener("click", function () { apply(l.code); close(); });
+      menu.appendChild(o);
+    });
+
+    host.appendChild(btn);
+    host.appendChild(menu);
+
+    function close() {
+      host.classList.remove("is-open");
+      btn.setAttribute("aria-expanded", "false");
+    }
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = host.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", String(open));
+    });
+    document.addEventListener("click", function (e) {
+      if (!host.contains(e.target)) close();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") close();
     });
   }
 

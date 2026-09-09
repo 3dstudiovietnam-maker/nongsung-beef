@@ -18,15 +18,24 @@
   --wrap: 1220px;
   --pad: clamp(20px, 5vw, 56px);
 
-  --f-disp: "Oswald", "Noto Sans Thai", "Noto Sans SC", sans-serif;
-  --f-body: "Inter", "Noto Sans Thai", "Noto Sans SC", sans-serif;
+  --f-disp: "Oswald", "Noto Sans Thai", "Noto Sans SC", "Noto Sans Lao", sans-serif;
+  --f-body: "Inter", "Noto Sans Thai", "Noto Sans SC", "Noto Sans Lao", sans-serif;
 
   --ease: cubic-bezier(.22,.68,.28,1);
 }
 
-/* Thai / Chinese get a body-face display too — Oswald has no Thai or CJK glyphs */
+/* Thai / Chinese / Lao get a body-face display too — Oswald has no Thai, CJK or Lao glyphs */
 html[lang="th"]{ --f-disp: "Noto Sans Thai", "Oswald", sans-serif; }
 html[lang="zh"]{ --f-disp: "Noto Sans SC", "Oswald", sans-serif; }
+html[lang="lo"]{ --f-disp: "Noto Sans Lao", "Oswald", sans-serif; }
+
+/* Thai and Lao are abugidas: the tone marks and vowels sit above and below the
+   consonant. Oswald's display tracking tears those stacks apart, so scripts that
+   stack must never inherit letter-spacing or uppercasing. */
+html[lang="th"] .eyebrow, html[lang="lo"] .eyebrow,
+html[lang="th"] .lang__opt, html[lang="lo"] .lang__opt{
+  letter-spacing:0; text-transform:none;
+}
 
 *,*::before,*::after{ box-sizing:border-box; }
 
@@ -62,9 +71,9 @@ a{ color:inherit; }
 /* ---------- typography ---------- */
 h1,h2,h3{ font-family:var(--f-disp); font-weight:600; line-height:1.06; margin:0 0 .5em; letter-spacing:-.01em; }
 h2{ font-size:clamp(30px,4.4vw,60px); text-transform:uppercase; }
-html[lang="th"] h2, html[lang="zh"] h2{ text-transform:none; letter-spacing:0; line-height:1.25; }
+html[lang="th"] h2, html[lang="zh"] h2, html[lang="lo"] h2{ text-transform:none; letter-spacing:0; line-height:1.25; }
 h3{ font-size:clamp(19px,1.7vw,25px); text-transform:uppercase; }
-html[lang="th"] h3, html[lang="zh"] h3{ text-transform:none; }
+html[lang="th"] h3, html[lang="zh"] h3, html[lang="lo"] h3{ text-transform:none; }
 p{ margin:0 0 1.1em; color:var(--txt-dim); max-width:62ch; }
 
 .eyebrow{
@@ -72,7 +81,7 @@ p{ margin:0 0 1.1em; color:var(--txt-dim); max-width:62ch; }
   letter-spacing:.34em; text-transform:uppercase;
   color:var(--gold); margin:0 0 1.1em;
 }
-html[lang="th"] .eyebrow, html[lang="zh"] .eyebrow{ letter-spacing:.16em; text-transform:none; font-size:13px; }
+html[lang="th"] .eyebrow, html[lang="zh"] .eyebrow, html[lang="lo"] .eyebrow{ letter-spacing:.16em; text-transform:none; font-size:13px; }
 
 /* ---------- buttons ---------- */
 .btn{
@@ -84,7 +93,7 @@ html[lang="th"] .eyebrow, html[lang="zh"] .eyebrow{ letter-spacing:.16em; text-t
   cursor:pointer; position:relative; overflow:hidden;
   transition:color .35s var(--ease), border-color .35s var(--ease);
 }
-html[lang="th"] .btn, html[lang="zh"] .btn{ letter-spacing:.05em; text-transform:none; font-size:15px; }
+html[lang="th"] .btn, html[lang="zh"] .btn, html[lang="lo"] .btn{ letter-spacing:.05em; text-transform:none; font-size:15px; }
 .btn::before{
   content:""; position:absolute; inset:0; background:var(--gold);
   transform:translateY(101%); transition:transform .4s var(--ease); z-index:-1;
@@ -101,7 +110,7 @@ html[lang="th"] .btn, html[lang="zh"] .btn{ letter-spacing:.05em; text-transform
   border-bottom:1px solid rgba(210,166,75,.35); padding-bottom:2px;
   transition:border-color .3s, color .3s;
 }
-html[lang="th"] .link, html[lang="zh"] .link{ text-transform:none; letter-spacing:.02em; }
+html[lang="th"] .link, html[lang="zh"] .link, html[lang="lo"] .link{ text-transform:none; letter-spacing:.02em; }
 .link:hover{ color:var(--gold-lt); border-color:var(--gold-lt); }
 
 /* ══════════ NAV ══════════ */
@@ -129,7 +138,7 @@ html[lang="th"] .link, html[lang="zh"] .link{ text-transform:none; letter-spacin
   text-transform:uppercase; text-decoration:none; color:var(--txt-dim);
   position:relative; padding:6px 0; transition:color .3s;
 }
-html[lang="th"] .nav__links a, html[lang="zh"] .nav__links a{ text-transform:none; letter-spacing:0; font-size:14px; }
+html[lang="th"] .nav__links a, html[lang="zh"] .nav__links a, html[lang="lo"] .nav__links a{ text-transform:none; letter-spacing:0; font-size:14px; }
 .nav__links a::after{
   content:""; position:absolute; left:0; bottom:0; width:0; height:1px;
   background:var(--gold); transition:width .35s var(--ease);
@@ -138,15 +147,45 @@ html[lang="th"] .nav__links a, html[lang="zh"] .nav__links a{ text-transform:non
 .nav__links a:hover::after{ width:100%; }
 
 .nav__tools{ display:flex; align-items:center; gap:14px; flex:0 0 auto; }
-.lang{ display:flex; border:1px solid var(--line-2); }
-.lang button{
-  background:none; border:0; color:var(--txt-dim); cursor:pointer;
+/* Eleven languages will not sit in a row, so the switcher is a dropdown.
+   The trigger shows the language you are reading in, in its own script. */
+.lang{ position:relative; }
+.lang__btn{
+  display:flex; align-items:center; gap:8px;
+  background:none; border:1px solid var(--line-2); color:var(--txt-dim); cursor:pointer;
   font-family:var(--f-body); font-size:12px; font-weight:600; letter-spacing:.06em;
-  padding:7px 11px; transition:background .25s, color .25s;
+  padding:7px 11px; transition:color .25s, border-color .25s;
 }
-.lang button + button{ border-left:1px solid var(--line); }
-.lang button:hover{ color:var(--txt); }
-.lang button.is-on{ background:var(--gold); color:#0A0A0C; }
+.lang__btn:hover{ color:var(--txt); border-color:var(--gold); }
+.lang__btn svg{ width:9px; height:9px; transition:transform .3s var(--ease); flex:0 0 auto; }
+.lang.is-open .lang__btn{ color:var(--txt); border-color:var(--gold); }
+.lang.is-open .lang__btn svg{ transform:rotate(180deg); }
+
+.lang__menu{
+  position:absolute; top:calc(100% + 8px); right:0; z-index:120;
+  min-width:186px; max-height:min(70vh,420px); overflow-y:auto;
+  background:var(--ink-2); border:1px solid var(--line-2);
+  box-shadow:0 18px 44px rgba(0,0,0,.55);
+  padding:5px 0;
+  opacity:0; visibility:hidden; transform:translateY(-6px);
+  transition:opacity .22s var(--ease), transform .22s var(--ease), visibility .22s;
+}
+.lang.is-open .lang__menu{ opacity:1; visibility:visible; transform:translateY(0); }
+
+.lang__opt{
+  display:flex; align-items:center; gap:10px; width:100%;
+  background:none; border:0; cursor:pointer; text-align:left;
+  color:var(--txt-dim); font-family:var(--f-body); font-size:13px; font-weight:500;
+  padding:9px 15px; transition:background .2s, color .2s;
+}
+.lang__opt:hover{ background:rgba(255,255,255,.05); color:var(--txt); }
+.lang__opt.is-on{ color:var(--gold); }
+.lang__opt.is-on::after{ content:"·"; margin-left:auto; color:var(--gold); font-size:20px; line-height:0; }
+.lang__code{
+  font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--txt-dim); opacity:.55; width:20px; flex:0 0 auto;
+}
+.lang__opt.is-on .lang__code{ color:var(--gold); opacity:1; }
 
 .burger{ display:none; width:40px; height:34px; background:none; border:1px solid var(--line-2); cursor:pointer; position:relative; }
 .burger span,.burger span::before,.burger span::after{
@@ -179,7 +218,7 @@ html[lang="th"] .nav__links a, html[lang="zh"] .nav__links a{ text-transform:non
   font-size:clamp(46px,9.2vw,132px); line-height:.94; margin:0 0 .35em;
   text-transform:uppercase; letter-spacing:-.02em;
 }
-html[lang="th"] .hero__title, html[lang="zh"] .hero__title{
+html[lang="th"] .hero__title, html[lang="zh"] .hero__title, html[lang="lo"] .hero__title{
   text-transform:none; letter-spacing:0; line-height:1.12; font-size:clamp(38px,7.4vw,104px);
 }
 .hero__title span{ display:block; }
@@ -211,7 +250,7 @@ html[lang="th"] .hero__title, html[lang="zh"] .hero__title{
   letter-spacing:.26em; text-transform:uppercase; color:var(--txt-dim);
   white-space:nowrap;
 }
-html[lang="th"] .marquee__track, html[lang="zh"] .marquee__track{ letter-spacing:.1em; text-transform:none; }
+html[lang="th"] .marquee__track, html[lang="zh"] .marquee__track, html[lang="lo"] .marquee__track{ letter-spacing:.1em; text-transform:none; }
 .marquee__track span{ display:flex; align-items:center; gap:52px; }
 .marquee__track span::after{ content:"◆"; color:var(--ruby); font-size:9px; }
 @keyframes marq{ to{ transform:translateX(-50%); } }
@@ -246,7 +285,7 @@ html[lang="th"] .marquee__track, html[lang="zh"] .marquee__track{ letter-spacing
   background:var(--ruby); color:#fff; padding:9px 16px;
   font-family:var(--f-disp); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
 }
-html[lang="th"] .cap, html[lang="zh"] .cap{ letter-spacing:.03em; text-transform:none; font-size:12px; }
+html[lang="th"] .cap, html[lang="zh"] .cap, html[lang="lo"] .cap{ letter-spacing:.03em; text-transform:none; font-size:12px; }
 .org{ color:var(--gold); font-weight:600; }
 
 .ticks{ list-style:none; margin:28px 0 0; padding:0; display:grid; gap:13px; }
@@ -291,7 +330,7 @@ html[lang="th"] .cap, html[lang="zh"] .cap{ letter-spacing:.03em; text-transform
   padding:6px 12px; font-family:var(--f-disp); font-size:10.5px;
   letter-spacing:.16em; text-transform:uppercase;
 }
-html[lang="th"] .tag, html[lang="zh"] .tag{ letter-spacing:.03em; text-transform:none; font-size:12px; }
+html[lang="th"] .tag, html[lang="zh"] .tag, html[lang="lo"] .tag{ letter-spacing:.03em; text-transform:none; font-size:12px; }
 .tag--gold{ background:var(--gold); color:#0A0A0C; border-color:var(--gold); }
 .card__body{ padding:clamp(22px,2.2vw,30px); display:flex; flex-direction:column; flex:1; }
 .card__sub{
@@ -385,7 +424,7 @@ html[lang="th"] .tag, html[lang="zh"] .tag{ letter-spacing:.03em; text-transform
   display:block; font-size:11px; letter-spacing:.16em; text-transform:uppercase;
   color:var(--txt-dim); margin-bottom:7px; font-family:var(--f-disp);
 }
-html[lang="th"] .form label span, html[lang="zh"] .form label span{ letter-spacing:.03em; text-transform:none; font-size:13px; }
+html[lang="th"] .form label span, html[lang="zh"] .form label span, html[lang="lo"] .form label span{ letter-spacing:.03em; text-transform:none; font-size:13px; }
 .form input,.form select,.form textarea{
   width:100%; background:var(--ink-3); border:1px solid var(--line);
   color:var(--txt); padding:12px 14px; font-family:var(--f-body); font-size:15px;
@@ -403,7 +442,7 @@ html[lang="th"] .form label span, html[lang="zh"] .form label span{ letter-spaci
   font-family:var(--f-disp); font-size:11px; letter-spacing:.18em;
   text-transform:uppercase; color:var(--gold); padding-top:3px;
 }
-html[lang="th"] .contact dt, html[lang="zh"] .contact dt{ letter-spacing:.03em; text-transform:none; font-size:13px; }
+html[lang="th"] .contact dt, html[lang="zh"] .contact dt, html[lang="lo"] .contact dt{ letter-spacing:.03em; text-transform:none; font-size:13px; }
 .contact dd{ margin:0; color:var(--txt); font-size:15px; }
 .contact a{ color:var(--txt); text-decoration:none; border-bottom:1px solid var(--line-2); }
 .contact a:hover{ color:var(--gold); border-color:var(--gold); }
