@@ -157,9 +157,17 @@ html[lang="th"] .nav__links a, html[lang="zh"] .nav__links a, html[lang="lo"] .n
   padding:7px 11px; transition:color .25s, border-color .25s;
 }
 .lang__btn:hover{ color:var(--txt); border-color:var(--gold); }
-.lang__btn svg{ width:9px; height:9px; transition:transform .3s var(--ease); flex:0 0 auto; }
 .lang.is-open .lang__btn{ color:var(--txt); border-color:var(--gold); }
-.lang.is-open .lang__btn svg{ transform:rotate(180deg); }
+
+/* globe = language, in any script; chevron = there is more behind it */
+.lang__globe{ width:13px; height:13px; color:var(--gold); flex:0 0 auto; }
+.lang__chev{ width:9px; height:9px; flex:0 0 auto; transition:transform .3s var(--ease); }
+.lang.is-open .lang__chev{ transform:rotate(180deg); }
+
+#langCur{ color:var(--txt); }
+.lang__sep{ width:1px; height:11px; background:var(--line-2); flex:0 0 auto; }
+.lang__alt{ opacity:.5; }
+.lang__btn:hover .lang__alt{ opacity:.8; }
 
 .lang__menu{
   position:absolute; top:calc(100% + 8px); right:0; z-index:120;

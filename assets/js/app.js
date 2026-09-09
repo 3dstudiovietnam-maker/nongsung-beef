@@ -52,9 +52,20 @@
       b.classList.toggle("is-on", b.dataset.lang === lang);
       b.setAttribute("aria-selected", String(b.dataset.lang === lang));
     });
+    // The trigger carries two labels — the language you are reading in, plus a
+    // second one greyed out beside it. One label alone reads as a logo or a
+    // stray word; two side by side are unmistakably a language choice, whatever
+    // script the visitor happens to be looking at.
     var cur = document.getElementById("langCur");
-    var meta = (window.LANGS || []).find(function (l) { return l.code === lang; });
-    if (cur && meta) cur.textContent = meta.short || meta.label;
+    var alt = document.getElementById("langAlt");
+    var short = function (code) {
+      var m = (window.LANGS || []).find(function (l) { return l.code === code; });
+      return m ? (m.short || m.label) : code.toUpperCase();
+    };
+    if (cur) cur.textContent = short(lang);
+    // English is the pair for every language except English itself, which pairs
+    // with Thai — the home market.
+    if (alt) alt.textContent = short(lang === "en" ? "th" : "en");
 
     try { sessionStorage.setItem(STORE_KEY, lang); } catch (e) {}
     // Clear any value left by the previous localStorage-based version, so a
@@ -79,8 +90,14 @@
     btn.setAttribute("aria-expanded", "false");
     btn.setAttribute("aria-label", "Language");
     btn.innerHTML =
-      '<span id="langCur">' + (langs[0] ? (langs[0].short || langs[0].label) : "") + "</span>" +
-      '<svg viewBox="0 0 10 6" aria-hidden="true">' +
+      '<svg class="lang__globe" viewBox="0 0 16 16" aria-hidden="true">' +
+      '<circle cx="8" cy="8" r="6.4" fill="none" stroke="currentColor" stroke-width="1.2"/>' +
+      '<path d="M1.6 8h12.8M8 1.6c1.7 1.8 2.6 4 2.6 6.4S9.7 12.6 8 14.4C6.3 12.6 5.4 10.4 5.4 8S6.3 3.4 8 1.6z"' +
+      ' fill="none" stroke="currentColor" stroke-width="1.2"/></svg>' +
+      '<span id="langCur"></span>' +
+      '<i class="lang__sep" aria-hidden="true"></i>' +
+      '<span id="langAlt" class="lang__alt"></span>' +
+      '<svg class="lang__chev" viewBox="0 0 10 6" aria-hidden="true">' +
       '<path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>';
 
     var menu = document.createElement("div");
