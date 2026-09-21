@@ -82,6 +82,10 @@ p{ margin:0 0 1.1em; color:var(--txt-dim); max-width:62ch; }
   color:var(--gold); margin:0 0 1.1em;
 }
 html[lang="th"] .eyebrow, html[lang="zh"] .eyebrow, html[lang="lo"] .eyebrow{ letter-spacing:.16em; text-transform:none; font-size:13px; }
+/* A thai és a lao abugida: a betűköz elválasztja a mellékjeleket az alapbetűtől.
+   Ennek a sornak a fenti UTÁN kell állnia — a 35. sori nullázást a fenti szabály
+   (azonos specificitás, későbbi hely) visszaírta .16em-re. */
+html[lang="th"] .eyebrow, html[lang="lo"] .eyebrow{ letter-spacing:0; }
 
 /* ---------- buttons ---------- */
 .btn{
@@ -521,3 +525,16 @@ html[lang="th"] .contact dt, html[lang="zh"] .contact dt, html[lang="lo"] .conta
   .contact dd{ margin-bottom:14px; }
   .hero__cta .btn{ flex:1 1 100%; }
 }
+
+/* ══════════ Thai + Lao: SOHA ne legyen betűköz ══════════
+   Mindkettő abugida — a betűköz leválasztja a hangjeleket és a magánhangzókat
+   az alapbetűről. A fájl VÉGÉN áll, hogy minden korábbi szabályt felülírjon. */
+html[lang="th"] .btn, html[lang="lo"] .btn,
+html[lang="th"] .link, html[lang="lo"] .link,
+html[lang="th"] .marquee__track, html[lang="lo"] .marquee__track,
+html[lang="th"] .cap, html[lang="lo"] .cap,
+html[lang="th"] .tag, html[lang="lo"] .tag,
+html[lang="th"] .form label span, html[lang="lo"] .form label span,
+html[lang="th"] .contact dt, html[lang="lo"] .contact dt,
+html[lang="th"] .nav__links a, html[lang="lo"] .nav__links a,
+html[lang="th"] .eyebrow, html[lang="lo"] .eyebrow{ letter-spacing:0; }
