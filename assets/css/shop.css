@@ -1,0 +1,183 @@
+/* ============================================================
+   NONGSUNG BEEF — ร้านค้าออนไลน์ (shop)
+   A style.css tokenjeire épül: --ink, --gold, --line, --f-disp…
+   ============================================================ */
+
+.shopbody{ padding-top:0; }
+
+/* ---------- fejléc ---------- */
+.shophead{
+  position:sticky; top:0; z-index:100;
+  background:rgba(8,8,10,.92); backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.shophead__in{ display:flex; align-items:center; gap:18px; height:72px; }
+.shophead__tools{ display:flex; align-items:center; gap:16px; margin-left:auto; }
+
+.backlink{
+  font-family:var(--f-disp); font-size:12px; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase; text-decoration:none;
+  color:var(--txt-dim); border-bottom:1px solid transparent; padding-bottom:2px;
+  transition:color .25s, border-color .25s;
+}
+.backlink:hover{ color:var(--gold); border-bottom-color:var(--gold); }
+html[lang="th"] .backlink{ letter-spacing:0; text-transform:none; font-size:13px; }
+
+/* ---------- hero ---------- */
+.shophero{ padding:56px 0 8px; }
+.shophero h1{
+  font-family:var(--f-disp); font-size:clamp(28px,4vw,52px);
+  text-transform:uppercase; margin:0 0 .4em;
+}
+html[lang="th"] .shophero h1{ text-transform:none; letter-spacing:0; line-height:1.25; }
+.shophero__lead{ font-size:clamp(15px,1.3vw,19px); color:#C9C4BC; max-width:56ch; }
+
+.demo{
+  display:flex; flex-direction:column; gap:4px;
+  border:1px solid rgba(210,166,75,.45);
+  background:rgba(210,166,75,.08);
+  padding:14px 18px; margin-top:22px; max-width:62ch;
+}
+.demo b{ color:var(--gold-lt); font-size:14px; }
+.demo span{ color:var(--txt-dim); font-size:14px; line-height:1.6; }
+
+.sec--tight{ padding:34px 0 70px; }
+
+/* ---------- elrendezés ---------- */
+.shoplayout{ display:grid; grid-template-columns:1fr 360px; gap:34px; align-items:start; }
+@media (max-width:1000px){ .shoplayout{ grid-template-columns:1fr; } }
+
+/* ---------- termékkártyák ---------- */
+.pgrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px; }
+
+.pcard{
+  border:1px solid var(--line); background:var(--ink-2);
+  display:flex; flex-direction:column; overflow:hidden;
+  transition:border-color .3s, transform .3s var(--ease);
+}
+.pcard:hover{ border-color:var(--line-2); transform:translateY(-3px); }
+
+.pcard__media{ position:relative; aspect-ratio:4/3; overflow:hidden; }
+.pcard__media img{ width:100%; height:100%; object-fit:cover; }
+.pcard__tag{
+  position:absolute; top:10px; left:10px;
+  background:rgba(8,8,10,.82); border:1px solid var(--line-2);
+  color:var(--gold); font-size:11px; padding:4px 9px;
+  font-family:var(--f-disp); letter-spacing:.08em; text-transform:uppercase;
+}
+html[lang="th"] .pcard__tag{ letter-spacing:0; text-transform:none; font-size:12px; }
+
+.pcard__body{ padding:15px 16px 17px; display:flex; flex-direction:column; gap:9px; flex:1; }
+.pcard__body h3{ font-size:16px; margin:0; text-transform:none; letter-spacing:0; line-height:1.35; }
+.pcard__body p{ margin:0; font-size:13.5px; line-height:1.6; color:var(--txt-dim); max-width:none; }
+
+.pcard__price{ display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin-top:auto; }
+.pcard__price b{ color:var(--gold-lt); font-size:19px; font-family:var(--f-disp); }
+.pcard__price span{ font-size:12.5px; color:var(--txt-dim); }
+.pcard__price .ph{
+  font-style:normal; font-size:11px; color:#C08A2E;
+  border:1px solid rgba(210,166,75,.4); padding:2px 7px;
+}
+
+/* mennyiség */
+.qrow{ display:flex; align-items:center; gap:7px; margin-top:4px; }
+.qbtn{
+  width:32px; height:32px; flex:0 0 auto;
+  background:none; border:1px solid var(--line-2); color:var(--txt);
+  font-size:17px; line-height:1; cursor:pointer; transition:border-color .2s, color .2s;
+}
+.qbtn:hover{ border-color:var(--gold); color:var(--gold); }
+.qval{ min-width:26px; text-align:center; font-family:var(--f-disp); font-size:15px; }
+
+.btn--sm{ padding:9px 15px; font-size:12px; margin-left:auto; }
+html[lang="th"] .btn--sm{ font-size:13px; }
+.btn.is-hit{ background:var(--gold-lt); color:#0A0A0C; border-color:var(--gold-lt); }
+
+/* ---------- „gyakorlatilag kész, csak adat kell" ---------- */
+.soonbox{ margin-top:38px; border-top:1px solid var(--line); padding-top:26px; }
+.soonbox h2{ font-size:clamp(19px,2vw,26px); margin:0 0 .3em; }
+.soonbox p{ font-size:14px; color:var(--txt-dim); }
+.soongrid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:12px; margin-top:16px; }
+.soon{
+  border:1px dashed var(--line-2); padding:14px 15px;
+  display:flex; flex-direction:column; gap:4px; background:rgba(255,255,255,.015);
+}
+.soon b{ font-size:14px; }
+.soon span{ font-size:12.5px; color:#8C877F; }
+
+/* ---------- oldalsáv panelek ---------- */
+.panel{
+  border:1px solid var(--line); background:var(--ink-2);
+  padding:18px 19px 20px; margin-bottom:16px;
+}
+.panel h2{
+  font-size:14px; letter-spacing:.14em; text-transform:uppercase;
+  margin:0 0 14px; color:var(--gold);
+}
+html[lang="th"] .panel h2{ letter-spacing:.02em; text-transform:none; font-size:15px; }
+
+.panel label{ display:block; margin-bottom:11px; }
+.panel label span{
+  display:block; font-size:12px; color:var(--txt-dim); margin-bottom:5px;
+  font-family:var(--f-disp); letter-spacing:.06em; text-transform:uppercase;
+}
+html[lang="th"] .panel label span{ letter-spacing:0; text-transform:none; font-size:13px; }
+.panel input, .panel textarea{
+  width:100%; background:var(--ink-3); border:1px solid var(--line-2);
+  color:var(--txt); font-family:var(--f-body); font-size:14px;
+  padding:9px 11px; resize:vertical;
+}
+.panel input:focus, .panel textarea:focus{ outline:none; border-color:var(--gold); }
+
+.cart__empty{ font-size:13.5px; color:var(--txt-dim); margin:0; }
+
+.citem{
+  display:grid; grid-template-columns:1fr auto auto auto;
+  gap:9px; align-items:center; padding:9px 0;
+  border-bottom:1px solid var(--line); font-size:13.5px;
+}
+.citem__n{ line-height:1.4; }
+.citem__q{ color:var(--txt-dim); }
+.citem__p{ color:var(--gold-lt); font-family:var(--f-disp); }
+.citem__x{
+  background:none; border:0; color:#7A756E; cursor:pointer; font-size:12px; padding:2px 4px;
+}
+.citem__x:hover{ color:var(--ruby-lt); }
+
+.sums{ margin-top:14px; font-size:13.5px; }
+.sums div{ display:flex; justify-content:space-between; padding:5px 0; color:var(--txt-dim); }
+.sums b{ color:var(--txt); font-family:var(--f-disp); }
+.sums__tot{ border-top:1px solid var(--line-2); margin-top:6px; padding-top:10px !important; }
+.sums__tot span{ color:var(--txt); }
+.sums__tot b{ color:var(--gold-lt); font-size:18px; }
+
+.shipopt{
+  display:grid; grid-template-columns:auto 1fr auto; gap:10px; align-items:center;
+  padding:9px 0; border-bottom:1px solid var(--line); font-size:13.5px; cursor:pointer;
+}
+.shipopt:last-child{ border-bottom:0; }
+.shipopt input{ width:auto; accent-color:var(--gold); }
+.shipopt b{ color:var(--gold-lt); font-family:var(--f-disp); font-size:13px; }
+
+.pay{ font-size:13px; color:var(--txt-dim); line-height:1.6; margin:0; }
+.pay--missing{
+  margin-top:9px; color:#C08A2E;
+  border-left:2px solid rgba(210,166,75,.5); padding-left:10px;
+}
+
+.panel--send{ display:flex; flex-direction:column; gap:9px; }
+.panel--send .btn{ margin:0; }
+
+/* ---------- visszajelzés ---------- */
+.flash{
+  position:fixed; left:50%; bottom:26px; transform:translateX(-50%);
+  background:var(--ink-3); border:1px solid var(--gold);
+  color:var(--txt); font-size:14px; padding:12px 20px; z-index:300;
+  box-shadow:0 14px 40px rgba(0,0,0,.6);
+}
+
+/* ---------- lábléc ---------- */
+.shopfoot{
+  border-top:1px solid var(--line); padding:26px 0 34px;
+  font-size:12.5px; color:#7A756E;
+}

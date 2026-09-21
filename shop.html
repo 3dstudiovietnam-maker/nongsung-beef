@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ร้านค้าออนไลน์ | NONGSUNG BEEF</title>
+<meta name="description" content="สั่งซื้อเนื้อโคขุนวากิว Black Mukda และเนื้ออบพรีเมียมออนไลน์ จากสหกรณ์การเกษตรหนองสูง จังหวัดมุกดาหาร">
+<meta name="theme-color" content="#08080A">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css?v=4">
+<link rel="stylesheet" href="assets/css/shop.css?v=1">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230A0A0C'/><circle cx='50' cy='50' r='30' fill='%23B4152B'/><text x='50' y='63' font-size='34' font-family='Arial' font-weight='bold' fill='%23fff' text-anchor='middle'>NS</text></svg>">
+</head>
+<body class="shopbody">
+
+<div class="grain" aria-hidden="true"></div>
+
+<header class="shophead">
+  <div class="wrap shophead__in">
+    <a class="brand" href="index.html">
+      <span class="brand__seal">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="31" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <circle cx="32" cy="32" r="20" fill="#B4152B"/>
+          <path d="M14 36c3-1 5-4 6-7 1-3 4-4 7-4h11c3 0 6 1 8 3 2 2 4 3 6 3v3c-2 1-4 3-5 5-1 3-4 4-7 4H24c-3 0-6-2-7-5-1-2-2-2-3-2z" fill="#0A0A0C"/>
+          <path d="M20 25l-3-5 5 2M44 25l3-5-5 2" stroke="#0A0A0C" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="brand__txt"><b>NONGSUNG</b><i>BLACK MUKDA WAGYU</i></span>
+    </a>
+
+    <div class="shophead__tools">
+      <a class="backlink" href="index.html" data-t="back">กลับไปหน้าเว็บไซต์</a>
+      <div class="lang" id="lang" role="group" aria-label="Language"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="shophero">
+    <div class="wrap">
+      <p class="eyebrow" data-t="head.eyebrow">สั่งซื้อออนไลน์</p>
+      <h1 data-t="head.title">ร้านค้าออนไลน์ NONGSUNG BEEF</h1>
+      <p class="shophero__lead" data-t="head.lead"></p>
+
+      <div class="demo">
+        <b data-t="demo.title"></b>
+        <span data-th="demo.body"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--tight">
+    <div class="wrap shoplayout">
+
+      <div class="shoplayout__main">
+        <div class="pgrid" id="grid"></div>
+
+        <div class="soonbox">
+          <h2 data-t="soon.title">กำลังจะมา</h2>
+          <p data-t="soon.lead"></p>
+          <div class="soongrid" id="soonGrid"></div>
+        </div>
+      </div>
+
+      <aside class="shoplayout__side">
+        <div class="panel">
+          <h2 data-t="cart.title">ตะกร้าสินค้า</h2>
+          <div id="cartBody"></div>
+
+          <div id="cartSums" class="sums" hidden>
+            <div><span data-t="cart.sub"></span><b id="sumSub"></b></div>
+            <div><span data-t="cart.ship"></span><b id="sumShip"></b></div>
+            <div class="sums__tot"><span data-t="cart.total"></span><b id="sumTotal"></b></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2 data-t="ship.title">วิธีจัดส่ง</h2>
+          <div id="shipList"></div>
+        </div>
+
+        <div class="panel">
+          <h2 data-t="form.title">ข้อมูลผู้สั่งซื้อ</h2>
+          <label><span data-t="form.name"></span>
+            <input id="fName" type="text" autocomplete="name"></label>
+          <label><span data-t="form.phone"></span>
+            <input id="fPhone" type="tel" autocomplete="tel"></label>
+          <label><span data-t="form.addr"></span>
+            <textarea id="fAddr" rows="3" autocomplete="street-address"></textarea></label>
+          <label><span data-t="form.note"></span>
+            <input id="fNote" type="text"></label>
+        </div>
+
+        <div class="panel">
+          <h2 data-t="pay.title">การชำระเงิน</h2>
+          <p class="pay" data-t="pay.body"></p>
+          <p class="pay pay--missing" id="payMissing" data-t="pay.missing"></p>
+        </div>
+
+        <div class="panel panel--send">
+          <button class="btn btn--gold btn--block" id="sendWa" data-t="send.wa"></button>
+          <button class="btn btn--ghost btn--block" id="sendLine" data-t="send.line"></button>
+          <button class="btn btn--ghost btn--block" id="sendMail" data-t="send.mail"></button>
+          <button class="btn btn--ghost btn--block" id="sendCopy" data-t="send.copy"></button>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+</main>
+
+<div class="flash" id="flash" hidden></div>
+
+<footer class="shopfoot">
+  <div class="wrap">
+    <span data-t="foot"></span> · <span id="yr"></span>
+  </div>
+</footer>
+
+<script src="assets/js/shop.js?v=1"></script>
+</body>
+</html>
