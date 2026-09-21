@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ร้านค้าออนไลน์ | NONGSUNG BEEF</title>
 <meta name="description" content="สั่งซื้อเนื้อโคขุนวากิว Black Mukda และเนื้ออบพรีเมียมออนไลน์ จากสหกรณ์การเกษตรหนองสูง จังหวัดมุกดาหาร">
 <meta name="theme-color" content="#08080A">
@@ -10,17 +10,20 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css?v=4">
-<link rel="stylesheet" href="assets/css/shop.css?v=1">
+<link rel="stylesheet" href="assets/css/shop.css?v=2">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230A0A0C'/><circle cx='50' cy='50' r='30' fill='%23B4152B'/><text x='50' y='63' font-size='34' font-family='Arial' font-weight='bold' fill='%23fff' text-anchor='middle'>NS</text></svg>">
 </head>
-<body class="shopbody">
+<body class="shop2">
 
 <div class="grain" aria-hidden="true"></div>
 
-<header class="shophead">
-  <div class="wrap shophead__in">
+<!-- mintabolt-jelzés: amíg a farm nem küldi a valódi árakat -->
+<div class="ribbon" id="ribbon"><span data-t="ribbon"></span></div>
+
+<header class="bar">
+  <div class="wrap bar__in">
     <a class="brand" href="index.html">
       <span class="brand__seal">
         <svg viewBox="0 0 64 64" aria-hidden="true">
@@ -32,9 +35,8 @@
       </span>
       <span class="brand__txt"><b>NONGSUNG</b><i>BLACK MUKDA WAGYU</i></span>
     </a>
-
-    <div class="shophead__tools">
-      <a class="backlink" href="index.html" data-t="back">กลับไปหน้าเว็บไซต์</a>
+    <div class="bar__tools">
+      <a class="bar__back" href="index.html">← <span data-t="back"></span></a>
       <div class="lang" id="lang" role="group" aria-label="Language"></div>
     </div>
   </div>
@@ -42,88 +44,140 @@
 
 <main>
 
-  <section class="shophero">
-    <div class="wrap">
-      <p class="eyebrow" data-t="head.eyebrow">สั่งซื้อออนไลน์</p>
-      <h1 data-t="head.title">ร้านค้าออนไลน์ NONGSUNG BEEF</h1>
-      <p class="shophero__lead" data-t="head.lead"></p>
+  <!-- ══════ NYITÓKÉP ══════ -->
+  <section class="hero2">
+    <img class="hero2__img" src="assets/img/hero.jpg" alt="">
+    <div class="hero2__veil"></div>
+    <div class="wrap hero2__in">
+      <p class="eyebrow" data-t="hero.eyebrow"></p>
+      <h1 class="hero2__title">
+        <span data-t="hero.title1"></span>
+        <span class="accent" data-t="hero.title2"></span>
+      </h1>
+      <p class="hero2__lead" data-t="hero.lead"></p>
+      <a class="btn btn--gold" href="#shop" data-t="hero.cta"></a>
+    </div>
+  </section>
 
-      <div class="demo">
-        <b data-t="demo.title"></b>
-        <span data-th="demo.body"></span>
+  <!-- ══════ BIZALMI SÁV ══════ -->
+  <section class="trust">
+    <div class="wrap trust__in">
+      <div class="trust__i">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.4 5 5.6.8-4 3.9.9 5.5L12 14.6 7.1 17.2 8 11.7 4 7.8l5.6-.8z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span data-t="trust.1"></span>
+      </div>
+      <div class="trust__i">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M4.5 6.5l15 11M19.5 6.5l-15 11M2 12h20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span data-t="trust.2"></span>
+      </div>
+      <div class="trust__i">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8.5 14 7 22l5-3 5 3-1.5-8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span data-t="trust.3"></span>
+      </div>
+      <div class="trust__i">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V10l9-6 9 6v11M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span data-t="trust.4"></span>
       </div>
     </div>
   </section>
 
-  <section class="sec sec--tight">
-    <div class="wrap shoplayout">
-
-      <div class="shoplayout__main">
-        <div class="pgrid" id="grid"></div>
-
-        <div class="soonbox">
-          <h2 data-t="soon.title">กำลังจะมา</h2>
-          <p data-t="soon.lead"></p>
-          <div class="soongrid" id="soonGrid"></div>
+  <!-- ══════ TERMÉKEK ══════ -->
+  <section class="catalog" id="shop">
+    <div class="wrap">
+      <header class="catalog__head">
+        <div>
+          <p class="eyebrow" data-t="shop.eyebrow"></p>
+          <h2 data-t="shop.title"></h2>
         </div>
-      </div>
+        <div class="chips" id="chips" role="tablist"></div>
+      </header>
+      <div class="grid2" id="grid"></div>
+    </div>
+  </section>
 
-      <aside class="shoplayout__side">
-        <div class="panel">
-          <h2 data-t="cart.title">ตะกร้าสินค้า</h2>
-          <div id="cartBody"></div>
-
-          <div id="cartSums" class="sums" hidden>
-            <div><span data-t="cart.sub"></span><b id="sumSub"></b></div>
-            <div><span data-t="cart.ship"></span><b id="sumShip"></b></div>
-            <div class="sums__tot"><span data-t="cart.total"></span><b id="sumTotal"></b></div>
-          </div>
-        </div>
-
-        <div class="panel">
-          <h2 data-t="ship.title">วิธีจัดส่ง</h2>
-          <div id="shipList"></div>
-        </div>
-
-        <div class="panel">
-          <h2 data-t="form.title">ข้อมูลผู้สั่งซื้อ</h2>
-          <label><span data-t="form.name"></span>
-            <input id="fName" type="text" autocomplete="name"></label>
-          <label><span data-t="form.phone"></span>
-            <input id="fPhone" type="tel" autocomplete="tel"></label>
-          <label><span data-t="form.addr"></span>
-            <textarea id="fAddr" rows="3" autocomplete="street-address"></textarea></label>
-          <label><span data-t="form.note"></span>
-            <input id="fNote" type="text"></label>
-        </div>
-
-        <div class="panel">
-          <h2 data-t="pay.title">การชำระเงิน</h2>
-          <p class="pay" data-t="pay.body"></p>
-          <p class="pay pay--missing" id="payMissing" data-t="pay.missing"></p>
-        </div>
-
-        <div class="panel panel--send">
-          <button class="btn btn--gold btn--block" id="sendWa" data-t="send.wa"></button>
-          <button class="btn btn--ghost btn--block" id="sendLine" data-t="send.line"></button>
-          <button class="btn btn--ghost btn--block" id="sendMail" data-t="send.mail"></button>
-          <button class="btn btn--ghost btn--block" id="sendCopy" data-t="send.copy"></button>
-        </div>
-      </aside>
-
+  <!-- ══════ HAMAROSAN ══════ -->
+  <section class="soonsec">
+    <div class="wrap">
+      <p class="eyebrow" data-t="soon.eyebrow"></p>
+      <h2 data-t="soon.title"></h2>
+      <p class="soonsec__lead" data-t="soon.lead"></p>
+      <div class="soongrid2" id="soonGrid"></div>
     </div>
   </section>
 
 </main>
 
-<div class="flash" id="flash" hidden></div>
-
-<footer class="shopfoot">
-  <div class="wrap">
-    <span data-t="foot"></span> · <span id="yr"></span>
+<footer class="foot2">
+  <div class="wrap foot2__in">
+    <span class="foot2__brand">NONGSUNG BEEF · Black Mukda Wagyu</span>
+    <span data-t="foot"></span>
   </div>
 </footer>
 
-<script src="assets/js/shop.js?v=1"></script>
+<!-- ══════ LEBEGŐ KOSÁR — mindig látszik, amint van benne valami ══════ -->
+<button class="fab" id="fab" type="button" hidden>
+  <span class="fab__icon">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.4" fill="currentColor"/><circle cx="17" cy="20" r="1.4" fill="currentColor"/></svg>
+    <i id="fabCount">0</i>
+  </span>
+  <span class="fab__txt" data-t="fab"></span>
+  <b class="fab__total" id="fabTotal"></b>
+  <span class="fab__go">→</span>
+</button>
+
+<!-- ══════ PÉNZTÁR — felcsúszó panel ══════ -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer__head">
+    <h2 data-t="cart.title"></h2>
+    <button class="drawer__close" id="drawerClose" type="button" aria-label="close">✕</button>
+  </div>
+
+  <div class="drawer__body">
+    <div id="cartEmpty" class="empty2">
+      <p data-t="cart.empty"></p>
+      <button class="btn btn--gold" id="emptyCta" type="button" data-t="cart.emptyCta"></button>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div id="checkout" hidden>
+      <div class="sums2">
+        <div><span data-t="cart.sub"></span><b id="sumSub"></b></div>
+        <div><span data-t="cart.ship"></span><b id="sumShip"></b></div>
+        <div class="sums2__tot"><span data-t="cart.total"></span><b id="sumTotal"></b></div>
+      </div>
+
+      <h3 class="dh" data-t="ship.title"></h3>
+      <div id="shipList"></div>
+
+      <h3 class="dh" data-t="form.title"></h3>
+      <label class="field"><span data-t="form.name"></span><input id="fName" type="text" autocomplete="name"></label>
+      <label class="field"><span data-t="form.phone"></span><input id="fPhone" type="tel" autocomplete="tel" inputmode="tel"></label>
+      <label class="field"><span data-t="form.addr"></span><textarea id="fAddr" rows="3" autocomplete="street-address"></textarea></label>
+      <label class="field"><span data-t="form.note"></span><input id="fNote" type="text"></label>
+
+      <h3 class="dh" data-t="pay.title"></h3>
+      <p class="paynote" data-t="pay.body"></p>
+      <p class="paynote paynote--warn" id="payMissing" data-t="pay.missing"></p>
+    </div>
+  </div>
+
+  <div class="drawer__foot" id="drawerFoot">
+    <button class="btn btn--gold btn--block send2" id="sendWa" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 0 1-11.8 7l-4.2 1.1 1.1-4A8 8 0 1 1 20 12z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+      <span data-t="send.wa"></span>
+    </button>
+    <button class="btn btn--ghost btn--block" id="sendLine" type="button" data-t="send.line"></button>
+    <div class="send2__row">
+      <button class="btn btn--ghost" id="sendMail" type="button" data-t="send.mail"></button>
+      <button class="btn btn--ghost" id="sendCopy" type="button" data-t="send.copy"></button>
+    </div>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/shop.js?v=2"></script>
 </body>
 </html>
