@@ -126,6 +126,7 @@ html[lang="th"] .hero2__title, html[lang="lo"] .hero2__title, html[lang="zh"] .h
 }
 .card2__badge--chef{ background:var(--ruby); color:#fff; }
 .card2__badge--bulk{ background:rgba(8,8,10,.8); color:var(--gold-lt); border:1px solid rgba(210,166,75,.5); }
+.card2__badge--freeship{ background:#1F8A4C; color:#fff; }
 
 .card2__body{ padding:18px 20px 20px; display:flex; flex-direction:column; flex:1; }
 .card2__size{

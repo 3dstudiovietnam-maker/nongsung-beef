@@ -9,6 +9,10 @@
        korábban 3300 px-szel a termékek alatt volt).
    v3: 11 nyelv; a rendelés MINDIG thaiul is megy a farmra,
        különben egy kínai vevő rendelését Pim nem tudná elolvasni.
+   v4 (09-22): az ELSŐ VALÓDI TERMÉK Pimtől — napon szárított thai wagyu,
+       80 g, 199 ฿, ingyenes szállítás egész Thaiföldön (az ő plakátjáról).
+       `real:true` → nincs „mintaár" jelzés; `freeShip:true` → ha a kosárban
+       csak ilyen van, a szállítás ingyenes.
    ============================================================ */
 (function () {
   "use strict";
@@ -28,6 +32,9 @@
   /* ---------------- TERMÉKEK (a szövegük a shop-i18n.js-ben) ---------------- */
 
   var PRODUCTS = [
+    // VALÓDI ár (Pim, 09-22). A kép helyőrző, amíg nem jön valódi zacskófotó —
+    // a jerky.jpg egy MÁSIK termék (60 g-os doboz), azt ide tenni „ไม่ตรงปก" lenne.
+    { id: "sunDried80",  cat: "jerky",  img: "assets/img/sundried80.svg", price: 199, badge: "freeship", real: true, freeShip: true },
     { id: "jerky60",     cat: "jerky",  img: "assets/img/jerky.jpg",  price: 150,  badge: "best" },
     { id: "jerkyCarton", cat: "jerky",  img: "assets/img/market.jpg", price: 1600, badge: "bulk" },
     { id: "ribeye",      cat: "fresh",  img: "assets/img/case.jpg",   price: 1200, badge: "chef" },
@@ -95,7 +102,13 @@
   function cartIds() { return Object.keys(cart).filter(function (k) { return cart[k] > 0; }); }
   function subtotal() { return cartIds().reduce(function (s, id) { return s + product(id).price * cart[id]; }, 0); }
   function count() { return cartIds().reduce(function (s, id) { return s + cart[id]; }, 0); }
-  function shipFee() { var s = SHIPPING.filter(function (x) { return x.id === ship; })[0]; return s ? s.fee : 0; }
+  // Ha a kosárban csak ingyen szállított termék van, bármelyik szállítási mód ingyenes.
+  function allFreeShip() {
+    var ids = cartIds();
+    return ids.length > 0 && ids.every(function (id) { return product(id).freeShip; });
+  }
+  function feeOf(s) { return allFreeShip() ? 0 : s.fee; }
+  function shipFee() { var s = SHIPPING.filter(function (x) { return x.id === ship; })[0]; return s ? feeOf(s) : 0; }
 
   /* ---------------- KATEGÓRIÁK ---------------- */
 
@@ -129,7 +142,7 @@
             '<p class="card2__size"></p><h3></h3><p class="card2__desc"></p>' +
             '<div class="card2__foot">' +
               '<div class="card2__price"><b>' + money(p.price) + "</b><span></span>" +
-                (CONFIG.pricesArePlaceholders ? "<em></em>" : "") +
+                (CONFIG.pricesArePlaceholders && !p.real ? "<em></em>" : "") +
               "</div>" +
               '<div class="stepper"><button type="button" aria-label="−">−</button>' +
                 "<output>1</output><button type=\"button\" aria-label=\"+\">+</button></div>" +
@@ -184,6 +197,7 @@
     $("fab").hidden = n === 0;
     $("fabCount").textContent = n;
     $("fabTotal").textContent = money(subtotal());
+    renderShipping();
     renderDrawer();
   }
 
@@ -228,7 +242,7 @@
         '<span class="shipopt2__fee"></span>');
       row.querySelector("b").textContent = tx("sh." + s.id + ".label");
       row.querySelector("small").textContent = tx("sh." + s.id + ".sub");
-      row.querySelector(".shipopt2__fee").textContent = s.fee ? money(s.fee) : t("free");
+      row.querySelector(".shipopt2__fee").textContent = feeOf(s) ? money(feeOf(s)) : t("free");
       row.querySelector("input").onchange = function () { ship = s.id; renderShipping(); renderDrawer(); };
       host.appendChild(row);
     });
