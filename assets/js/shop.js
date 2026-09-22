@@ -34,7 +34,7 @@
   var PRODUCTS = [
     // VALÓDI ár (Pim, 09-22). A kép helyőrző, amíg nem jön valódi zacskófotó —
     // a jerky.jpg egy MÁSIK termék (60 g-os doboz), azt ide tenni „ไม่ตรงปก" lenne.
-    { id: "sunDried80",  cat: "jerky",  img: "assets/img/sundried80.svg", price: 199, badge: "freeship", real: true, freeShip: true },
+    { id: "sunDried80",  cat: "jerky",  img: "assets/img/sundried80-v2.svg", price: 199, badge: "freeship", real: true, freeShip: true },
     { id: "jerky60",     cat: "jerky",  img: "assets/img/jerky.jpg",  price: 150,  badge: "best" },
     { id: "jerkyCarton", cat: "jerky",  img: "assets/img/market.jpg", price: 1600, badge: "bulk" },
     { id: "ribeye",      cat: "fresh",  img: "assets/img/case.jpg",   price: 1200, badge: "chef" },
