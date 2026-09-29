@@ -9,6 +9,7 @@
        korábban 3300 px-szel a termékek alatt volt).
    v3: 11 nyelv; a rendelés MINDIG thaiul is megy a farmra,
        különben egy kínai vevő rendelését Pim nem tudná elolvasni.
+   v5 (09-30): +2 valódi termék (เนื้อกระจก 50 g, เนื้อทุบ 50 g), mind 199 ฿.
    v4 (09-22): az ELSŐ VALÓDI TERMÉK Pimtől — napon szárított thai wagyu,
        80 g, 199 ฿, ingyenes szállítás egész Thaiföldön (az ő plakátjáról).
        `real:true` → nincs „mintaár" jelzés; `freeShip:true` → ha a kosárban
@@ -35,6 +36,10 @@
     // VALÓDI ár (Pim, 09-22). A kép helyőrző, amíg nem jön valódi zacskófotó —
     // a jerky.jpg egy MÁSIK termék (60 g-os doboz), azt ide tenni „ไม่ตรงปก" lenne.
     { id: "sunDried80",  cat: "jerky",  img: "assets/img/sundried80-v2.svg", price: 199, badge: "freeship", real: true, freeShip: true },
+    // 09-30: Pim megerősítette WhatsAppon — MIND A HÁROM valódi termék 199 ฿ ("199 ทั้ง 3").
+    // A TikTok Shopban 223/237 ฿ szerepel, az a platform jutalékával; a mi boltunkban a közvetlen ár megy.
+    { id: "mirror50",    cat: "jerky",  img: "assets/img/mirror50-v1.svg",  price: 199, real: true },
+    { id: "pounded50",   cat: "jerky",  img: "assets/img/pounded50-v1.svg", price: 199, real: true },
     { id: "jerky60",     cat: "jerky",  img: "assets/img/jerky.jpg",  price: 150,  badge: "best" },
     { id: "jerkyCarton", cat: "jerky",  img: "assets/img/market.jpg", price: 1600, badge: "bulk" },
     { id: "ribeye",      cat: "fresh",  img: "assets/img/case.jpg",   price: 1200, badge: "chef" },
