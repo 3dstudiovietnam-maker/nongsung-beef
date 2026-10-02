@@ -24,8 +24,13 @@
   var CONFIG = {
     orderWhatsApp: "66610281908",          // +66 61 028 1908 — a weboldalon már nyilvános
     orderEmail: "nongsungbeef@gmail.com",
-    orderLine: "",                          // LINE hivatalos link — MÉG NINCS MEG
-    promptPayId: "",                        // PromptPay — MÉG NINCS MEG
+    orderLine: "https://line.me/ti/p/~pimsimple",  // Pim LINE-ja (ID: PIMSIMPLE) — 10-02-től megvan
+    lineId: "PIMSIMPLE",                    // a vevő ide küldi az utalási bizonylatot
+    promptPayId: "",                        // PromptPay nincs — a szövetkezet BANKSZÁMLÁJÁRA megy az utalás
+    bankName: "ธนาคารกสิกรไทย (KASIKORNBANK)",
+    bankBranch: "สาขาเซียร์ รังสิต",
+    bankAccountNo: "418-2-88920-8",
+    bankAccountName: "สหกรณ์การเกษตรหนองสูง จำกัด (ปศุสัตว์)",
     pricesArePlaceholders: true,            // amíg true, mindenhol ott a „mintaár" jelzés
     currency: "฿",
     farmLang: "th"                          // a rendelés ezen a nyelven is megy a farmra
@@ -356,7 +361,21 @@
     document.title = t("title");
     document.querySelectorAll("[data-t]").forEach(function (e) { e.textContent = t(e.getAttribute("data-t")); });
 
-    $("payMissing").hidden = !!CONFIG.promptPayId;
+    $("payMissing").hidden = !!(CONFIG.promptPayId || CONFIG.bankAccountNo);
+    var bankBox = $("payBank");
+    if (bankBox) {
+      if (CONFIG.bankAccountNo) {
+        var rows = [
+          "<b>" + t("pay.bankTitle") + "</b>",
+          t("pay.bankAcc") + ": <b>" + CONFIG.bankAccountNo + "</b>",
+          t("pay.bankName") + ": " + CONFIG.bankAccountName,
+          t("pay.bankBranch") + ": " + CONFIG.bankName + (CONFIG.bankBranch ? " — " + CONFIG.bankBranch : "")
+        ];
+        if (CONFIG.lineId) rows.push(t("pay.slip") + " <b>" + CONFIG.lineId + "</b>");
+        bankBox.innerHTML = rows.join("<br>");
+        bankBox.hidden = false;
+      } else { bankBox.hidden = true; }
+    }
     $("ribbon").hidden = !CONFIG.pricesArePlaceholders;
 
     document.querySelectorAll(".lang__opt").forEach(function (b) { b.classList.toggle("is-on", b.dataset.lang === code); });
